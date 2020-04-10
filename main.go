@@ -86,9 +86,13 @@ func (bc BodyComposition) UploadWeight(email, password string) {
 	bc.uploadFitFile(reader, email, password)
 }
 
-func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle float64) BodyComposition {
+func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle float64, timestamp int64) BodyComposition {
+	ts := time.Now()
+	if timestamp != -1 {
+		ts = time.Unix(timestamp, 0)
+	}
 	return BodyComposition{
-		TimeStamp:        time.Now(),
+		TimeStamp:        ts,
 		Weight:           weight,
 		PercentFat:       percentFat,
 		PercentHydration: percentHydration,
