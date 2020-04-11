@@ -24,7 +24,7 @@ var uploadCmd = &cobra.Command{
 		hydration, _ := cmd.Flags().GetFloat64("hydration")
 		bone, _ := cmd.Flags().GetFloat64("bone")
 		muscle, _ := cmd.Flags().GetFloat64("muscle")
-		ts, _ := cmd.Flags().GetInt64("ts")
+		ts, _ := cmd.Flags().GetInt64("unix-timestamp")
 
 		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, ts)
 
@@ -54,5 +54,5 @@ func init() {
 	uploadCmd.Flags().Float64("hydration", 0, "Set your hydration in percent")
 	uploadCmd.Flags().Float64P("bone", "b", 0, "Set your bone mass in percent")
 	uploadCmd.Flags().Float64P("muscle", "m", 0, "Set your muscle mass in percent")
-	uploadCmd.Flags().Int64P("ts", "t", -1, "Set the timestamp of the measurement")
+	uploadCmd.Flags().Int64P("unix-timestamp", "t", -1, "Set the timestamp of the measurement")
 }
