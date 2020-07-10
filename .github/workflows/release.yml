@@ -7,13 +7,12 @@ on:
       - v*.*.*
 
 jobs:
-  goreleaser:
+  build:
     runs-on: ubuntu-latest
+    name: goreleaser
     steps:
       - name: checkout
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
       - name: set up Go
         uses: actions/setup-go@v2
         with:
