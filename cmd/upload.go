@@ -57,8 +57,8 @@ func init() {
 	uploadCmd.Flags().Float64("hydration", 0, "Set your hydration in percent")
 	uploadCmd.Flags().Float64P("bone", "b", 0, "Set your bone mass in percent")
 	uploadCmd.Flags().Float64P("muscle", "m", 0, "Set your muscle mass in percent")
-	uploadCmd.Flags().Float64P("visceralFat", "v", 0, "Set your visceral fat rating (valid values: 1-60)")
-	uploadCmd.Flags().Float64P("metabolicAge", "g", 0, "Set your metabolic age)")
-	uploadCmd.Flags().Float64P("physiqueRating", "r", 0, "Set your physique rating (valid values: 1-9)")
+	uploadCmd.Flags().Float64("visceralFat", 0, "Set your visceral fat rating (valid values: 1-60)")
+	uploadCmd.Flags().Float64("metabolicAge", 0, "Set your metabolic age")
+	uploadCmd.Flags().Float64("physiqueRating", 0, "Set your physique rating (valid values: 1-9)")
 	uploadCmd.Flags().Int64P("unix-timestamp", "t", -1, "Set the timestamp of the measurement")
 }
