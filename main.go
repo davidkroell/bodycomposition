@@ -25,12 +25,15 @@ func (bc BodyComposition) writeFitFile(writer io.Writer) error {
 		UserProfile: nil,
 		WeightScales: []*fit.WeightScaleMsg{
 			{
-				Timestamp:        bc.TimeStamp,
-				Weight:           fit.Weight(bc.Weight * 100),
-				PercentFat:       uint16(bc.PercentFat * 100),
-				PercentHydration: uint16(bc.PercentHydration * 100),
-				BoneMass:         uint16(bc.Weight * bc.PercentBone),
-				MuscleMass:       uint16(bc.Weight * bc.PercentMuscle),
+				Timestamp:         bc.TimeStamp,
+				Weight:            fit.Weight(bc.Weight * 100),
+				PercentFat:        uint16(bc.PercentFat * 100),
+				PercentHydration:  uint16(bc.PercentHydration * 100),
+				BoneMass:          uint16(bc.Weight * bc.PercentBone),
+				MuscleMass:        uint16(bc.Weight * bc.PercentMuscle),
+				VisceralFatRating: uint8(bc.VisceralFatRating),
+				PhysiqueRating:    uint8(bc.PhysiqueRating),
+				MetabolicAge:      uint8(bc.MetabolicAge),
 			},
 		},
 	}
