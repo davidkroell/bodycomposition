@@ -24,11 +24,12 @@ var uploadCmd = &cobra.Command{
 		hydration, _ := cmd.Flags().GetFloat64("hydration")
 		bone, _ := cmd.Flags().GetFloat64("bone")
 		muscle, _ := cmd.Flags().GetFloat64("muscle")
+		ts, _ := cmd.Flags().GetInt64("unix-timestamp")
 		visceralFat, _ := cmd.Flags().GetFloat64("visceralFat")
 		metabolicAge, _ := cmd.Flags().GetFloat64("metabolicAge")
 		physiqueRating, _ := cmd.Flags().GetFloat64("physiqueRating")
 
-		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, visceralFat, physiqueRating, metabolicAge)
+		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, visceralFat, physiqueRating, metabolicAge, ts)
 
 		email, _ := cmd.Flags().GetString("email")
 		password, _ := cmd.Flags().GetString("password")
@@ -59,4 +60,5 @@ func init() {
 	uploadCmd.Flags().Float64P("visceralFat", "v", 0, "Set your visceral fat rating (valid values: 1-60)")
 	uploadCmd.Flags().Float64P("metabolicAge", "g", 0, "Set your metabolic age)")
 	uploadCmd.Flags().Float64P("physiqueRating", "r", 0, "Set your physique rating (valid values: 1-9)")
+	uploadCmd.Flags().Int64P("unix-timestamp", "t", -1, "Set the timestamp of the measurement")
 }

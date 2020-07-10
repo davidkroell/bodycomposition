@@ -25,15 +25,12 @@ func (bc BodyComposition) writeFitFile(writer io.Writer) error {
 		UserProfile: nil,
 		WeightScales: []*fit.WeightScaleMsg{
 			{
-				Timestamp:         bc.TimeStamp,
-				Weight:            fit.Weight(bc.Weight * 100),
-				PercentFat:        uint16(bc.PercentFat * 100),
-				PercentHydration:  uint16(bc.PercentHydration * 100),
-				VisceralFatRating: uint8(bc.VisceralFatRating),
-				BoneMass:          uint16(bc.Weight * bc.PercentBone),
-				MuscleMass:        uint16(bc.Weight * bc.PercentMuscle),
-				PhysiqueRating:    uint8(bc.PhysiqueRating),
-				MetabolicAge:      uint8(bc.MetabolicAge),
+				Timestamp:        bc.TimeStamp,
+				Weight:           fit.Weight(bc.Weight * 100),
+				PercentFat:       uint16(bc.PercentFat * 100),
+				PercentHydration: uint16(bc.PercentHydration * 100),
+				BoneMass:         uint16(bc.Weight * bc.PercentBone),
+				MuscleMass:       uint16(bc.Weight * bc.PercentMuscle),
 			},
 		},
 	}
@@ -92,9 +89,14 @@ func (bc BodyComposition) UploadWeight(email, password string) {
 	bc.uploadFitFile(reader, email, password)
 }
 
-func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle, visceralFatRating, physiqueRating, metabolicAge float64) BodyComposition {
+func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle, visceralFatRating, physiqueRating, metabolicAge float64, timestamp int64) BodyComposition {
+	ts := time.Now()
+	if timestamp != -1 {
+		ts = time.Unix(timestamp, 0)
+	}
+
 	return BodyComposition{
-		TimeStamp:         time.Now(),
+		TimeStamp:         ts,
 		Weight:            weight,
 		PercentFat:        percentFat,
 		PercentHydration:  percentHydration,
