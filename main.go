@@ -9,12 +9,15 @@ import (
 )
 
 type BodyComposition struct {
-	TimeStamp        time.Time
-	Weight           float64
-	PercentFat       float64
-	PercentHydration float64
-	PercentBone      float64
-	PercentMuscle    float64
+	TimeStamp         time.Time
+	Weight            float64
+	PercentFat        float64
+	PercentHydration  float64
+	PercentBone       float64
+	PercentMuscle     float64
+	VisceralFatRating float64
+	PhysiqueRating    float64
+	MetabolicAge      float64
 }
 
 func (bc BodyComposition) writeFitFile(writer io.Writer) error {
@@ -22,12 +25,15 @@ func (bc BodyComposition) writeFitFile(writer io.Writer) error {
 		UserProfile: nil,
 		WeightScales: []*fit.WeightScaleMsg{
 			{
-				Timestamp:        bc.TimeStamp,
-				Weight:           fit.Weight(bc.Weight * 100),
-				PercentFat:       uint16(bc.PercentFat * 100),
-				PercentHydration: uint16(bc.PercentHydration * 100),
-				BoneMass:         uint16(bc.Weight * bc.PercentBone),
-				MuscleMass:       uint16(bc.Weight * bc.PercentMuscle),
+				Timestamp:         bc.TimeStamp,
+				Weight:            fit.Weight(bc.Weight * 100),
+				PercentFat:        uint16(bc.PercentFat * 100),
+				PercentHydration:  uint16(bc.PercentHydration * 100),
+				VisceralFatRating: uint8(bc.VisceralFatRating),
+				BoneMass:          uint16(bc.Weight * bc.PercentBone),
+				MuscleMass:        uint16(bc.Weight * bc.PercentMuscle),
+				PhysiqueRating:    uint8(bc.PhysiqueRating),
+				MetabolicAge:      uint8(bc.MetabolicAge),
 			},
 		},
 	}
@@ -86,13 +92,16 @@ func (bc BodyComposition) UploadWeight(email, password string) {
 	bc.uploadFitFile(reader, email, password)
 }
 
-func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle float64) BodyComposition {
+func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle, visceralFatRating, physiqueRating, metabolicAge float64) BodyComposition {
 	return BodyComposition{
-		TimeStamp:        time.Now(),
-		Weight:           weight,
-		PercentFat:       percentFat,
-		PercentHydration: percentHydration,
-		PercentBone:      percentBone,
-		PercentMuscle:    percentMuscle,
+		TimeStamp:         time.Now(),
+		Weight:            weight,
+		PercentFat:        percentFat,
+		PercentHydration:  percentHydration,
+		PercentBone:       percentBone,
+		PercentMuscle:     percentMuscle,
+		VisceralFatRating: visceralFatRating,
+		PhysiqueRating:    physiqueRating,
+		MetabolicAge:      metabolicAge,
 	}
 }
