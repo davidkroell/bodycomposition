@@ -2,6 +2,7 @@ package bodycomposition
 
 import (
 	"encoding/binary"
+	"fmt"
 	"github.com/abrander/garmin-connect"
 	"github.com/tormoder/fit"
 	"io"
@@ -71,7 +72,11 @@ func (bc BodyComposition) uploadFitFile(reader io.Reader, email string, password
 
 	_, err := client.ImportActivity(reader, connect.ActivityFormatFIT)
 	if err != nil {
-		panic(err)
+		if err == connect.ErrWrongCredentials {
+			fmt.Println("Authentication failed")
+		} else {
+			panic(err)
+		}
 	}
 
 	return true
