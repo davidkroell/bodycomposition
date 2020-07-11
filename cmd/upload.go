@@ -42,6 +42,8 @@ var uploadCmd = &cobra.Command{
 			password = string(bytePasswd)
 		}
 
+		cmd.Println("... uploading weight")
+
 		bc.UploadWeight(email, password)
 	},
 }
