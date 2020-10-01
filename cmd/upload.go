@@ -1,9 +1,11 @@
 package cmd
 
 import (
+	"os"
+	"syscall"
+
 	"github.com/davidkroell/bodycomposition"
 	"golang.org/x/crypto/ssh/terminal"
-	"syscall"
 
 	"github.com/spf13/cobra"
 )
@@ -25,9 +27,10 @@ var uploadCmd = &cobra.Command{
 		bone, _ := cmd.Flags().GetFloat64("bone")
 		muscle, _ := cmd.Flags().GetFloat64("muscle")
 		ts, _ := cmd.Flags().GetInt64("unix-timestamp")
-		visceralFat, _ := cmd.Flags().GetFloat64("visceralFat")
-		metabolicAge, _ := cmd.Flags().GetFloat64("metabolicAge")
-		physiqueRating, _ := cmd.Flags().GetFloat64("physiqueRating")
+		visceralFat, _ := cmd.Flags().GetFloat64("visceral-fat")
+		metabolicAge, _ := cmd.Flags().GetFloat64("metabolic-age")
+		physiqueRating, _ := cmd.Flags().GetFloat64("physique-rating")
+		maxTries, _ := cmd.Flags().GetInt("max-tries")
 
 		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, visceralFat, physiqueRating, metabolicAge, ts)
 
@@ -44,7 +47,14 @@ var uploadCmd = &cobra.Command{
 
 		cmd.Println("... uploading weight")
 
-		bc.UploadWeight(email, password)
+		for i := 0; i < maxTries; i++ {
+			if ok := bc.UploadWeight(email, password); ok {
+				os.Exit(1)
+			}
+		}
+
+		cmd.Println("exiting after ", maxTries, " tries")
+		os.Exit(1)
 	},
 }
 
@@ -59,8 +69,10 @@ func init() {
 	uploadCmd.Flags().Float64("hydration", 0, "Set your hydration in percent")
 	uploadCmd.Flags().Float64P("bone", "b", 0, "Set your bone mass in percent")
 	uploadCmd.Flags().Float64P("muscle", "m", 0, "Set your muscle mass in percent")
-	uploadCmd.Flags().Float64("visceralFat", 0, "Set your visceral fat rating (valid values: 1-60)")
-	uploadCmd.Flags().Float64("metabolicAge", 0, "Set your metabolic age")
-	uploadCmd.Flags().Float64("physiqueRating", 0, "Set your physique rating (valid values: 1-9)")
+	uploadCmd.Flags().Float64("visceral-fat", 0, "Set your visceral fat rating (valid values: 1-60)")
+	uploadCmd.Flags().Float64("metabolic-age", 0, "Set your metabolic age")
+	uploadCmd.Flags().Float64("physique-rating", 0, "Set your physique rating (valid values: 1-9)")
 	uploadCmd.Flags().Int64P("unix-timestamp", "t", -1, "Set the timestamp of the measurement")
+
+	uploadCmd.Flags().Int("max-tries", 1, "Set maximum retry count, if error occur in Garmin Connect api")
 }

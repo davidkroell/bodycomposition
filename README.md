@@ -10,6 +10,11 @@ Releases can be found in [release](https://github.com/davidkroell/bodycompositio
 
 ## Usage
 
+Uploading weight to Garmin connect. If you do not provide a password (`--password`), it will be prompted from stdin.
+```bash
+$ ./bodycompsition upload --weight 80 --bone 14 --fat 13 --hydration 58 --muscle 42 --email john.doe@mail.com
+```
+
 General usage
 ```bash
 $ ./bodycompsition -h

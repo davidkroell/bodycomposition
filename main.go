@@ -3,10 +3,11 @@ package bodycomposition
 import (
 	"encoding/binary"
 	"fmt"
-	"github.com/abrander/garmin-connect"
-	"github.com/tormoder/fit"
 	"io"
 	"time"
+
+	connect "github.com/abrander/garmin-connect"
+	"github.com/tormoder/fit"
 )
 
 type BodyComposition struct {
@@ -22,49 +23,31 @@ type BodyComposition struct {
 }
 
 func (bc BodyComposition) writeFitFile(writer io.Writer) error {
-	weightfile := fit.WeightFile{
-		UserProfile: nil,
-		WeightScales: []*fit.WeightScaleMsg{
-			{
-				Timestamp:         bc.TimeStamp,
-				Weight:            fit.Weight(bc.Weight * 100),
-				PercentFat:        uint16(bc.PercentFat * 100),
-				PercentHydration:  uint16(bc.PercentHydration * 100),
-				BoneMass:          uint16(bc.Weight * bc.PercentBone),
-				MuscleMass:        uint16(bc.Weight * bc.PercentMuscle),
-				VisceralFatRating: uint8(bc.VisceralFatRating),
-				PhysiqueRating:    uint8(bc.PhysiqueRating),
-				MetabolicAge:      uint8(bc.MetabolicAge),
-			},
+	fitfile, err := fit.NewFile(fit.FileTypeWeight, fit.NewHeader(fit.V20, true))
+	if err != nil {
+		return err
+	}
+
+	weight, err := fitfile.Weight()
+	if err != nil {
+		return err
+	}
+
+	weight.WeightScales = []*fit.WeightScaleMsg{
+		{
+			Timestamp:         bc.TimeStamp,
+			Weight:            fit.Weight(bc.Weight * 100),
+			PercentFat:        uint16(bc.PercentFat * 100),
+			PercentHydration:  uint16(bc.PercentHydration * 100),
+			BoneMass:          uint16(bc.Weight * bc.PercentBone),
+			MuscleMass:        uint16(bc.Weight * bc.PercentMuscle),
+			VisceralFatRating: uint8(bc.VisceralFatRating),
+			PhysiqueRating:    uint8(bc.PhysiqueRating),
+			MetabolicAge:      uint8(bc.MetabolicAge),
 		},
 	}
 
-	fitfile := fit.File{
-		FileId: struct {
-			Type         fit.FileType
-			Manufacturer fit.Manufacturer
-			Product      uint16
-			SerialNumber uint32
-			TimeCreated  time.Time
-			Number       uint16
-			ProductName  string
-		}{Type: fit.FileTypeWeight, Manufacturer: fit.ManufacturerTanita},
-		Header: struct {
-			Size            byte
-			ProtocolVersion byte
-			ProfileVersion  uint16
-			DataSize        uint32
-			DataType        [4]byte
-			CRC             uint16
-		}{Size: 14, ProtocolVersion: 16, ProfileVersion: 2092, DataType: [4]byte{46, 70, 73, 84}},
-	}
-
-	err := fitfile.SetWeight(&weightfile)
-	if err != nil {
-		panic(err)
-	}
-
-	return fit.Encode(writer, &fitfile, binary.BigEndian)
+	return fit.Encode(writer, fitfile, binary.BigEndian)
 }
 
 func (bc BodyComposition) uploadFitFile(reader io.Reader, email string, password string) bool {
@@ -72,17 +55,15 @@ func (bc BodyComposition) uploadFitFile(reader io.Reader, email string, password
 
 	_, err := client.ImportActivity(reader, connect.ActivityFormatFIT)
 	if err != nil {
-		if err == connect.ErrWrongCredentials {
-			fmt.Println("Authentication failed")
-		} else {
-			panic(err)
-		}
+		fmt.Println("Error uploading file to Garmin Connect: ", err.Error())
+		return false
 	}
 
 	return true
 }
 
-func (bc BodyComposition) UploadWeight(email, password string) {
+// UploadWeight uploads the bodycomposition data to garmin connect
+func (bc BodyComposition) UploadWeight(email, password string) bool {
 	reader, writer := io.Pipe()
 
 	go func() {
@@ -94,9 +75,10 @@ func (bc BodyComposition) UploadWeight(email, password string) {
 		}
 	}()
 
-	bc.uploadFitFile(reader, email, password)
+	return bc.uploadFitFile(reader, email, password)
 }
 
+// NewBodyComposition creates a new bodycomposition type
 func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle, visceralFatRating, physiqueRating, metabolicAge float64, timestamp int64) BodyComposition {
 	ts := time.Now()
 	if timestamp != -1 {
