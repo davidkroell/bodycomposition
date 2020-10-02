@@ -49,7 +49,7 @@ var uploadCmd = &cobra.Command{
 
 		for i := 0; i < maxTries; i++ {
 			if ok := bc.UploadWeight(email, password); ok {
-				os.Exit(1)
+				os.Exit(0)
 			}
 		}
 
