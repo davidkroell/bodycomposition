@@ -22,6 +22,8 @@ github.com/abrander/garmin-connect v0.0.0-20201002100939-da491be5fee2 h1:SYRBNkP
 github.com/abrander/garmin-connect v0.0.0-20201002100939-da491be5fee2/go.mod h1:poJ6EaEedNZ+eN7x6FUcoiJxB0Jt3yX9H62vLEkHyY0=
 github.com/abrander/garmin-connect v0.0.0-20201105111721-87587d558be7 h1:zykV8d7THAbC8O4eipmG9h5BBswMJWrZ4RVWRJrphoY=
 github.com/abrander/garmin-connect v0.0.0-20201105111721-87587d558be7/go.mod h1:poJ6EaEedNZ+eN7x6FUcoiJxB0Jt3yX9H62vLEkHyY0=
+github.com/abrander/garmin-connect v0.0.0-20210202215341-7a00bf55428a h1:vBi7Ca5jUOaJBCdnsV4O2EHqWax/Rf7lIlrLf2IgEuc=
+github.com/abrander/garmin-connect v0.0.0-20210202215341-7a00bf55428a/go.mod h1:HUe20BWwAgZgstFcUUnlkQnXRD7PHbwf+y3ANDmPVIE=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
 github.com/armon/circbuf v0.0.0-20150827004946-bbbad097214e/go.mod h1:3U/XgcO3hCbHZ8TKRvWD2dDTCfh9M9ya+I9JpbB7O8o=
@@ -207,6 +209,8 @@ github.com/tormoder/fit v0.6.1-0.20200930131844-73889fd7c108 h1:TTsV4w7mENDOGjgk
 github.com/tormoder/fit v0.6.1-0.20200930131844-73889fd7c108/go.mod h1:0/EGDJDK7m3uXhNH+vnV9IDlmnvBCVJkISRGWob11bY=
 github.com/tormoder/fit v0.8.0 h1:pGzXtwyG7EG5LexraW+QdZgelFNbFQwn+IL0w+ztaQQ=
 github.com/tormoder/fit v0.8.0/go.mod h1:0/EGDJDK7m3uXhNH+vnV9IDlmnvBCVJkISRGWob11bY=
+github.com/tormoder/fit v0.9.0 h1:42q9uaiSqNEjHYWmaYQBkf8VPhl6jyvOdFZSeb+RF6Q=
+github.com/tormoder/fit v0.9.0/go.mod h1:0/EGDJDK7m3uXhNH+vnV9IDlmnvBCVJkISRGWob11bY=
 github.com/ugorji/go v1.1.4/go.mod h1:uQMGLiO92mf5W77hV/PUCpI3pbzQx3CRekS0kk+RGrc=
 github.com/xiang90/probing v0.0.0-20190116061207-43a291ad63a2/go.mod h1:UETIi67q53MR2AWcXfiuqkDkRtnGDLqkBTpCHuJHxtU=
 github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77/go.mod h1:aYKd//L2LvnjZzWKhF00oedf4jCCReLcmhLdhm1A27Q=
