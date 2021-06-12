@@ -30,9 +30,10 @@ var uploadCmd = &cobra.Command{
 		visceralFat, _ := cmd.Flags().GetFloat64("visceral-fat")
 		metabolicAge, _ := cmd.Flags().GetFloat64("metabolic-age")
 		physiqueRating, _ := cmd.Flags().GetFloat64("physique-rating")
+		calories, _ := cmd.Flags().GetFloat64("calories")
 		maxTries, _ := cmd.Flags().GetInt("max-tries")
 
-		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, visceralFat, physiqueRating, metabolicAge, ts)
+		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, visceralFat, physiqueRating, metabolicAge, calories, ts)
 
 		email, _ := cmd.Flags().GetString("email")
 		password, _ := cmd.Flags().GetString("password")
@@ -69,6 +70,7 @@ func init() {
 	uploadCmd.Flags().Float64("hydration", 0, "Set your hydration in percent")
 	uploadCmd.Flags().Float64P("bone", "b", 0, "Set your bone mass in percent")
 	uploadCmd.Flags().Float64P("muscle", "m", 0, "Set your muscle mass in percent")
+	uploadCmd.Flags().Float64P("calories", "c", 0, "Set your caloric intake")
 	uploadCmd.Flags().Float64("visceral-fat", 0, "Set your visceral fat rating (valid values: 1-60)")
 	uploadCmd.Flags().Float64("metabolic-age", 0, "Set your metabolic age")
 	uploadCmd.Flags().Float64("physique-rating", 0, "Set your physique rating (valid values: 1-9)")
