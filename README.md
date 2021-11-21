@@ -4,6 +4,14 @@ Garmin Connect Cloud (https://connect.garmin.com) from your beloved commandline.
 
 For now, you can just add body composition values. Any other thing should be done in Garmin Connect.
 
+## Version 2.2
+Parameter `--max-tries` is obsolete and therefore no longer present.
+Furthermore, two new parameters `--bmi` and `--calories` were added.
+
+### Migrating from Version 2.x
+
+* Remove the parameter `--max-tries`
+
 ## Version 2
 After some design and command line interface changed, a new release, `v2.0.0` was created.
 
@@ -59,12 +67,13 @@ Aliases:
   upload, u, add
 
 Flags:
+      --bmi float               Set your BMI - body mass index
   -b, --bone float              Set your bone mass in percent
+  -c, --calories float          Set your caloric intake
   -e, --email string            Email of the Garmin account
   -f, --fat float               Set your fat in percent
   -h, --help                    help for upload
       --hydration float         Set your hydration in percent
-      --max-tries int           Set maximum retry count, if error occur in Garmin Connect api (default 1)
       --metabolic-age float     Set your metabolic age
   -m, --muscle float            Set your muscle mass in percent
   -p, --password string         Password of the Garmin account

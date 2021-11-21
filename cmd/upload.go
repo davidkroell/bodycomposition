@@ -31,9 +31,9 @@ var uploadCmd = &cobra.Command{
 		metabolicAge, _ := cmd.Flags().GetFloat64("metabolic-age")
 		physiqueRating, _ := cmd.Flags().GetFloat64("physique-rating")
 		calories, _ := cmd.Flags().GetFloat64("calories")
-		maxTries, _ := cmd.Flags().GetInt("max-tries")
+		bmi, _ := cmd.Flags().GetFloat64("bmi")
 
-		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, visceralFat, physiqueRating, metabolicAge, calories, ts)
+		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, visceralFat, physiqueRating, metabolicAge, calories, bmi, ts)
 
 		email, _ := cmd.Flags().GetString("email")
 		password, _ := cmd.Flags().GetString("password")
@@ -48,13 +48,10 @@ var uploadCmd = &cobra.Command{
 
 		cmd.Println("... uploading weight")
 
-		for i := 0; i < maxTries; i++ {
-			if ok := bc.UploadWeight(email, password); ok {
-				os.Exit(0)
-			}
+		if ok := bc.UploadWeight(email, password); ok {
+			os.Exit(0)
 		}
 
-		cmd.Println("exiting after ", maxTries, " tries")
 		os.Exit(1)
 	},
 }
@@ -74,7 +71,6 @@ func init() {
 	uploadCmd.Flags().Float64("visceral-fat", 0, "Set your visceral fat rating (valid values: 1-60)")
 	uploadCmd.Flags().Float64("metabolic-age", 0, "Set your metabolic age")
 	uploadCmd.Flags().Float64("physique-rating", 0, "Set your physique rating (valid values: 1-9)")
+	uploadCmd.Flags().Float64("bmi", 0, "Set your BMI - body mass index")
 	uploadCmd.Flags().Int64P("unix-timestamp", "t", -1, "Set the timestamp of the measurement")
-
-	uploadCmd.Flags().Int("max-tries", 1, "Set maximum retry count, if error occur in Garmin Connect api")
 }

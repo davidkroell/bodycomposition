@@ -21,6 +21,7 @@ type BodyComposition struct {
 	PhysiqueRating    float64
 	MetabolicAge      float64
 	CaloriesActiveMet float64
+	BodyMassIndex     float64
 }
 
 func (bc BodyComposition) writeFitFile(writer io.Writer) error {
@@ -46,6 +47,7 @@ func (bc BodyComposition) writeFitFile(writer io.Writer) error {
 			PhysiqueRating:    uint8(bc.PhysiqueRating),
 			MetabolicAge:      uint8(bc.MetabolicAge),
 			ActiveMet:         uint16(bc.CaloriesActiveMet),
+			BodyMassIndex:     uint16(bc.BodyMassIndex * 10),
 		},
 	}
 
@@ -81,7 +83,7 @@ func (bc BodyComposition) UploadWeight(email, password string) bool {
 }
 
 // NewBodyComposition creates a new bodycomposition type
-func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle, visceralFatRating, physiqueRating, metabolicAge, caloriesActiveMet float64, timestamp int64) BodyComposition {
+func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle, visceralFatRating, physiqueRating, metabolicAge, caloriesActiveMet, bmi float64, timestamp int64) BodyComposition {
 	ts := time.Now()
 	if timestamp != -1 {
 		ts = time.Unix(timestamp, 0)
@@ -98,5 +100,6 @@ func NewBodyComposition(weight, percentFat, percentHydration, percentBone, perce
 		PhysiqueRating:    physiqueRating,
 		MetabolicAge:      metabolicAge,
 		CaloriesActiveMet: caloriesActiveMet,
+		BodyMassIndex:     bmi,
 	}
 }
