@@ -3,7 +3,7 @@ module github.com/davidkroell/bodycomposition
 go 1.15
 
 require (
-	github.com/abrander/garmin-connect v0.0.0-20210602213040-cca51ea7c807
+	github.com/abrander/garmin-connect v0.0.0-20211222095001-064d09050879
 	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/gordonklaus/ineffassign v0.0.0-20210522101830-0589229737b2 // indirect
 	github.com/kisielk/errcheck v1.6.0 // indirect
