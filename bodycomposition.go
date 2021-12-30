@@ -2,11 +2,9 @@ package bodycomposition
 
 import (
 	"encoding/binary"
-	"fmt"
 	"io"
 	"time"
 
-	connect "github.com/abrander/garmin-connect"
 	"github.com/tormoder/fit"
 )
 
@@ -54,35 +52,7 @@ func (bc BodyComposition) writeFitFile(writer io.Writer) error {
 	return fit.Encode(writer, fitfile, binary.BigEndian)
 }
 
-func (bc BodyComposition) uploadFitFile(reader io.Reader, email string, password string) bool {
-	client := connect.NewClient(connect.Credentials(email, password))
-
-	_, err := client.ImportActivity(reader, connect.ActivityFormatFIT)
-	if err != nil {
-		fmt.Println("Error uploading file to Garmin Connect: ", err.Error())
-		return false
-	}
-
-	return true
-}
-
-// UploadWeight uploads the bodycomposition data to garmin connect
-func (bc BodyComposition) UploadWeight(email, password string) bool {
-	reader, writer := io.Pipe()
-
-	go func() {
-		defer writer.Close()
-
-		err := bc.writeFitFile(writer)
-		if err != nil {
-			panic(err)
-		}
-	}()
-
-	return bc.uploadFitFile(reader, email, password)
-}
-
-// NewBodyComposition creates a new bodycomposition type
+// NewBodyComposition creates a new bodycomposition instance
 func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle, visceralFatRating, physiqueRating, metabolicAge, caloriesActiveMet, bmi float64, timestamp int64) BodyComposition {
 	ts := time.Now()
 	if timestamp != -1 {
