@@ -1,3 +1,15 @@
+<p align="center">
+
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/davidkroell/bodycomposition/Go%20build%20and%20test)](https://github.com/davidkroell/bodycomposition/actions/workflows/build.yml)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/davidkroell/bodycomposition)](https://github.com/davidkroell/bodycomposition/releases/latest)
+[![GitHub go.mod Go version (subdirectory of monorepo)](https://img.shields.io/github/go-mod/go-version/davidkroell/bodycomposition)](https://github.com/davidkroell/bodycomposition/blob/master/go.mod)
+[![Go Report Card](https://goreportcard.com/badge/github.com/davidkroell/bodycomposition)](https://goreportcard.com/report/github.com/davidkroell/bodycomposition)
+[![Go Reference](https://pkg.go.dev/badge/github.com/davidkroell/bodycomposition.svg)](https://pkg.go.dev/github.com/davidkroell/bodycomposition)
+[![GitHub all releases](https://img.shields.io/github/downloads/davidkroell/bodycomposition/total?color=orange)](https://github.com/davidkroell/bodycomposition/releases)
+[![GitHub license](https://img.shields.io/github/license/davidkroell/bodycomposition)](https://github.com/davidkroell/bodycomposition/blob/master/LICENSE)
+
+</p>
+
 # bodycompostion
 Bodycomposition is a program to manage your body measurements and composition stored in
 Garmin Connect Cloud (https://connect.garmin.com) from your beloved commandline.
