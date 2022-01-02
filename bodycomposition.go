@@ -8,6 +8,7 @@ import (
 	"github.com/tormoder/fit"
 )
 
+//BodyComposition is the data container struct for managing the body measurements
 type BodyComposition struct {
 	TimeStamp         time.Time
 	Weight            float64
@@ -52,7 +53,7 @@ func (bc BodyComposition) writeFitFile(writer io.Writer) error {
 	return fit.Encode(writer, fitfile, binary.BigEndian)
 }
 
-// NewBodyComposition creates a new bodycomposition instance
+// NewBodyComposition creates a new BodyComposition instance
 func NewBodyComposition(weight, percentFat, percentHydration, percentBone, percentMuscle, visceralFatRating, physiqueRating, metabolicAge, caloriesActiveMet, bmi float64, timestamp int64) BodyComposition {
 	ts := time.Now()
 	if timestamp != -1 {

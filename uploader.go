@@ -13,7 +13,7 @@ func uploadFitFile(reader io.Reader, email string, password string) error {
 	return err
 }
 
-// Upload uploads the bodycomposition data to garmin connect
+// Upload uploads the BodyComposition data to garmin connect
 func Upload(email, password string, bc BodyComposition) error {
 	reader, writer := io.Pipe()
 
