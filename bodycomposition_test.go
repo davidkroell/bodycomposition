@@ -7,7 +7,7 @@ import (
 
 func TestNewBodyCompositionWithDefault(t *testing.T) {
 
-	bc := NewBodyComposition(80, 14.4, 55.2, 37, 45.5, 21, 5, 23, 2250, 12.6, -1)
+	bc := NewBodyComposition(80, 14.4, 55.2, 37, 2.98, 45.5, 55, 21, 5, 23, 2250, 12.6, -1)
 
 	now := time.Now()
 
@@ -26,7 +26,7 @@ func TestNewBodyComposition(t *testing.T) {
 	// set local time to UTC, no matter where executed
 	time.Local = time.UTC
 
-	bc := NewBodyComposition(80, 14.4, 55.2, 37, 45.5, 21, 5, 23, 2250, 12.6, timeStamp)
+	bc := NewBodyComposition(80, 14.4, 55.2, 37, 2.98, 45.5, 55, 21, 5, 23, 2250, 12.6, timeStamp)
 
 	year, month, date := bc.TimeStamp.Date()
 	hour, min, sec := bc.TimeStamp.Clock()

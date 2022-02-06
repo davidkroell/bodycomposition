@@ -24,7 +24,7 @@ func TestUploadWeightToGarminIntegration(t *testing.T) {
 		t.Fatalf("Environment variable %s was not set. This is required.", garminPasswordEnvKey)
 	}
 
-	var bc = NewBodyComposition(80, 14.4, 55.2, 37, 45.5, 21, 5, 23, 2250, 12.6, -1)
+	var bc = NewBodyComposition(80, 14.4, 55.2, 37, 2.98, 45.5, 55, 21, 5, 23, 2250, 12.6, -1)
 
 	err := Upload(email, passWord, bc)
 
