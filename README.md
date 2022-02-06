@@ -65,6 +65,7 @@ Aliases:
 Flags:
       --bmi float               Set your BMI - body mass index
   -b, --bone float              Set your bone mass in percent
+      --bone-mass float         Set your bone mass in kilograms (use --bone or --bone-mass)
   -c, --calories float          Set your caloric intake
   -e, --email string            Email of the Garmin account
   -f, --fat float               Set your fat in percent
@@ -72,6 +73,7 @@ Flags:
       --hydration float         Set your hydration in percent
       --metabolic-age float     Set your metabolic age
   -m, --muscle float            Set your muscle mass in percent
+      --muscle-mass float       Set your muscle mass in kilograms (use -muscle or --muscle-mass)
   -p, --password string         Password of the Garmin account
       --physique-rating float   Set your physique rating (valid values: 1-9)
   -t, --unix-timestamp int      Set the timestamp of the measurement (default -1)

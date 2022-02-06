@@ -26,7 +26,9 @@ var uploadCmd = &cobra.Command{
 		fat, _ := flags.GetFloat64("fat")
 		hydration, _ := flags.GetFloat64("hydration")
 		bone, _ := flags.GetFloat64("bone")
+		boneKg, _ := flags.GetFloat64("bone-mass")
 		muscle, _ := flags.GetFloat64("muscle")
+		muscleKg, _ := flags.GetFloat64("muscle-mass")
 		ts, _ := flags.GetInt64("unix-timestamp")
 		visceralFat, _ := flags.GetFloat64("visceral-fat")
 		metabolicAge, _ := flags.GetFloat64("metabolic-age")
@@ -34,7 +36,7 @@ var uploadCmd = &cobra.Command{
 		calories, _ := flags.GetFloat64("calories")
 		bmi, _ := flags.GetFloat64("bmi")
 
-		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, muscle, visceralFat, physiqueRating, metabolicAge, calories, bmi, ts)
+		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, boneKg, muscle, muscleKg, visceralFat, physiqueRating, metabolicAge, calories, bmi, ts)
 
 		email, _ := cmd.Flags().GetString("email")
 		password, _ := cmd.Flags().GetString("password")
@@ -70,7 +72,9 @@ func init() {
 	flags.Float64P("fat", "f", 0, "Set your fat in percent")
 	flags.Float64("hydration", 0, "Set your hydration in percent")
 	flags.Float64P("bone", "b", 0, "Set your bone mass in percent")
+	flags.Float64("bone-mass", 0, "Set your bone mass in kilograms")
 	flags.Float64P("muscle", "m", 0, "Set your muscle mass in percent")
+	flags.Float64("muscle-mass", 0, "Set your muscle mass in kilograms")
 	flags.Float64P("calories", "c", 0, "Set your caloric intake")
 	flags.Float64("visceral-fat", 0, "Set your visceral fat rating (valid values: 1-60)")
 	flags.Float64("metabolic-age", 0, "Set your metabolic age")
