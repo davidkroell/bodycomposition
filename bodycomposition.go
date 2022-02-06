@@ -40,8 +40,8 @@ func (bc BodyComposition) writeFitFile(writer io.Writer) error {
 			Weight:            fit.Weight(bc.Weight * 100),
 			PercentFat:        uint16(bc.PercentFat * 100),
 			PercentHydration:  uint16(bc.PercentHydration * 100),
-			BoneMass:          uint16(bc.BoneMass),
-			MuscleMass:        uint16(bc.MuscleMass),
+			BoneMass:          uint16(bc.BoneMass * 100),
+			MuscleMass:        uint16(bc.MuscleMass * 100),
 			VisceralFatRating: uint8(bc.VisceralFatRating),
 			PhysiqueRating:    uint8(bc.PhysiqueRating),
 			MetabolicAge:      uint8(bc.MetabolicAge),
@@ -54,24 +54,10 @@ func (bc BodyComposition) writeFitFile(writer io.Writer) error {
 }
 
 // NewBodyComposition creates a new BodyComposition instance
-func NewBodyComposition(weight, percentFat, percentHydration, percentBone, boneMass, percentMuscle, muscleMass ,visceralFatRating, physiqueRating, metabolicAge, caloriesActiveMet, bmi float64, timestamp int64) BodyComposition {
+func NewBodyComposition(weight, percentFat, percentHydration, boneMass, muscleMass, visceralFatRating, physiqueRating, metabolicAge, caloriesActiveMet, bmi float64, timestamp int64) BodyComposition {
 	ts := time.Now()
 	if timestamp != -1 {
 		ts = time.Unix(timestamp, 0)
-	}
-	var bm float64
-	var mm float64
-
-	if(percentBone != 0 ) {
-		bm = weight * percentBone
-	} else {
-		bm = boneMass * 100
-	}
-
-	if(percentMuscle != 0 ) {
-		mm = weight * percentMuscle
-	} else {
-	    mm = muscleMass * 100
 	}
 
 	return BodyComposition{
@@ -79,8 +65,8 @@ func NewBodyComposition(weight, percentFat, percentHydration, percentBone, boneM
 		Weight:            weight,
 		PercentFat:        percentFat,
 		PercentHydration:  percentHydration,
-		BoneMass:          bm,
-		MuscleMass:        mm,
+		BoneMass:          boneMass,
+		MuscleMass:        muscleMass,
 		VisceralFatRating: visceralFatRating,
 		PhysiqueRating:    physiqueRating,
 		MetabolicAge:      metabolicAge,

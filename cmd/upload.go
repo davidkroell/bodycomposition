@@ -36,7 +36,32 @@ var uploadCmd = &cobra.Command{
 		calories, _ := flags.GetFloat64("calories")
 		bmi, _ := flags.GetFloat64("bmi")
 
-		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, bone, boneKg, muscle, muscleKg, visceralFat, physiqueRating, metabolicAge, calories, bmi, ts)
+		var boneMass float64
+		var muscleMass float64
+
+		if bone != -1 && boneKg != -1 {
+			cmd.PrintErrf("Cannot provide bone weight in percent and bone mass in kg! Use either of both!")
+			os.Exit(1)
+		}
+
+		if bone != -1 {
+			boneMass = weight * bone / 100
+		} else {
+			boneMass = boneKg
+		}
+
+		if muscle != -1 && muscleKg != -1 {
+			cmd.PrintErrf("Cannot provide muscle weight in percent and muscle mass in kg! Use either of both!")
+			os.Exit(1)
+		}
+
+		if muscle != -1 {
+			muscleMass = weight * muscle / 100
+		} else {
+			muscleMass = muscleKg
+		}
+
+		bc := bodycomposition.NewBodyComposition(weight, fat, hydration, boneMass, muscleMass, visceralFat, physiqueRating, metabolicAge, calories, bmi, ts)
 
 		email, _ := cmd.Flags().GetString("email")
 		password, _ := cmd.Flags().GetString("password")
@@ -71,10 +96,10 @@ func init() {
 	flags.Float64P("weight", "w", -1, "Set your weight in kilograms")
 	flags.Float64P("fat", "f", 0, "Set your fat in percent")
 	flags.Float64("hydration", 0, "Set your hydration in percent")
-	flags.Float64P("bone", "b", 0, "Set your bone mass in percent")
-	flags.Float64("bone-mass", 0, "Set your bone mass in kilograms")
-	flags.Float64P("muscle", "m", 0, "Set your muscle mass in percent")
-	flags.Float64("muscle-mass", 0, "Set your muscle mass in kilograms")
+	flags.Float64P("bone", "b", -1, "Set your bone mass in percent")
+	flags.Float64("bone-mass", -1, "Set your bone mass in kilograms")
+	flags.Float64P("muscle", "m", -1, "Set your muscle mass in percent")
+	flags.Float64("muscle-mass", -1, "Set your muscle mass in kilograms")
 	flags.Float64P("calories", "c", 0, "Set your caloric intake")
 	flags.Float64("visceral-fat", 0, "Set your visceral fat rating (valid values: 1-60)")
 	flags.Float64("metabolic-age", 0, "Set your metabolic age")
