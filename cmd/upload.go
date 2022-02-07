@@ -20,7 +20,7 @@ var uploadCmd = &cobra.Command{
 		weight, _ := flags.GetFloat64("weight")
 		if weight == -1 {
 			cmd.PrintErr("No weight specified\n")
-			return
+			os.Exit(1)
 		}
 
 		fat, _ := flags.GetFloat64("fat")
