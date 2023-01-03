@@ -1,6 +1,6 @@
 <p align="center">
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/davidkroell/bodycomposition/Go%20build%20and%20test)](https://github.com/davidkroell/bodycomposition/actions/workflows/build.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/davidkroell/bodycomposition/build.yml?branch=master)](https://github.com/davidkroell/bodycomposition/actions/workflows/build.yml)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/davidkroell/bodycomposition)](https://github.com/davidkroell/bodycomposition/releases/latest)
 [![GitHub go.mod Go version (subdirectory of monorepo)](https://img.shields.io/github/go-mod/go-version/davidkroell/bodycomposition)](https://github.com/davidkroell/bodycomposition/blob/master/go.mod)
 [![Go Report Card](https://goreportcard.com/badge/github.com/davidkroell/bodycomposition)](https://goreportcard.com/report/github.com/davidkroell/bodycomposition)
