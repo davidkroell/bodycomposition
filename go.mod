@@ -10,9 +10,8 @@ require (
 	github.com/mdempsky/unconvert v0.0.0-20200228143138-95ecdbfc0b5f // indirect
 	github.com/spf13/cobra v1.1.1
 	github.com/tormoder/fit v0.12.1-0.20211110214232-41cc0169d78b
-	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
+	golang.org/x/crypto v0.1.0
 	golang.org/x/lint v0.0.0-20210508222113-6edffad5e616 // indirect
-	golang.org/x/text v0.3.8 // indirect
 	honnef.co/go/tools v0.2.0 // indirect
 	mvdan.cc/gofumpt v0.1.1 // indirect
 )
